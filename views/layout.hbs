@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Movie Browser</title>
+        <link rel="stylesheet" href="/style.css">
+        <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel="icon"
+          type="image/png"
+          href="/img/favicon.png"> -->
+   </head>
+   <body>
+       <h1>MOVIES</h1>
+       <div class="row header nav">
+
+         {{#if user}}
+           <!-- <p>Logged in as
+           {{ spotifyId }}</p> -->
+           <a href='/'>Home</a>
+           <a href={{url}}>User Profile</a>
+           <a href='/signout'>Log Out</a>
+
+           <!-- <p id="profile">User profile</p> -->
+           </div>
+           {{{body}}}
+         {{else}}
+           <form action="/auth/twitter">
+             <input class="login" type="submit" value="Log in with Twitter">
+           </form>
+           <!-- <a href='/signout'>Log Out</a> -->
+           </div>
+         {{/if}}
+
+         <div class="fave-box">
+                 <h2 class="faves-header">Your favorite movies</h2>
+                 <ul class="fave-list">
+                 </ul>
+        </div>
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="/js/models/user.js"></script>
+      <script src="/js/models/movie.js"></script>
+      <script src="/js/views/movieView.js"></script>
+      <script src="/js/views/userView.js"></script>
+      <script src="/js/script.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,20 @@
+body {
+    background-color: lemonchiffon;
+}
+
+#addFave {
+    display: block;
+    margin-top: 20px;
+}
+.fave-box {
+    width: 33%;
+    border: 1px solid black;
+    /*float: right;*/
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.faves-header {
+    text-align: center;
+}
