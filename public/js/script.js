@@ -92,7 +92,7 @@ $("body").on("click", "#addFave", function(e){
     $.ajax({
       type: 'POST',
       data: { "title": movieTitle },
-      url: "http://127.0.0.1:3001/movies"
+      url: "https://moovee-faves.herokuapp.com/movies"
     }).done(function(response) {
       console.log(response)
       $(".fave-list").append("<li>"+ movieTitle +"</li>")

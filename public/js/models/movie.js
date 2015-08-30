@@ -7,7 +7,7 @@ var Movie = function(info){
 // This function will make an ajax call to the server and return all movies. Then we push all of the movies into an array and retun the movies array
 Movie.fetch = function(){
   var request = $.ajax({
-          url: "http://127.0.0.1:3001/movies",
+          url: "https://moovee-faves.herokuapp.com/movies",
           method: "get"
       })
   .then(function(response) {
