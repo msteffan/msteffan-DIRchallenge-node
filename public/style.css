@@ -1,5 +1,15 @@
-body {
-    background-color: lemonchiffon;
+p {
+    width: 60%;
+}
+a {
+    color: black;
+}
+a:visited {
+    color: black;
+}
+.browse {
+    width: 60%;
+    margin: 0 auto;
 }
 
 #addFave {
@@ -8,13 +18,20 @@ body {
 }
 .fave-box {
     width: 33%;
-    border: 1px solid black;
-    /*float: right;*/
+    height: 95vh;
+    border: 4px solid grey;
+    border-radius: 10px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 20px;
+    overflow: auto;
 }
 
 .faves-header {
     text-align: center;
+}
+
+#showMovies {
+    display: block;
+    margin: 0 auto;
 }

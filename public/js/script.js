@@ -12,6 +12,17 @@ $('#movie-select').hide().on('change', function() {
   show(this.value);
 });
 
+$("#showMovies").on("click",function(){
+    $(".fave-list").children().remove();
+    Movie.fetch()
+    .then(function(movies){
+      movies.forEach(function(movie){
+          $(".fave-list").append("<li>"+ movie.title +"</li>")
+        // var view = new MovieView(movie)
+        // view.render();
+     })
+   })
+});
 
 function search(keyword) {
   //  endpoint for our json search request
