@@ -1,3 +1,4 @@
+// load in our dependencies:
 var express = require("express");
 var app = express();
 var path = require("path");
@@ -10,7 +11,7 @@ var methodOverride = require('method-override');
 var db = require("./db/connection");
 var pg = require('pg');
 
-
+// connect our database for deployment to heroku
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
@@ -22,6 +23,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     });
 });
 
+// set up our views
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
@@ -37,7 +39,7 @@ else {
  var env = process.env;
 }
 
-
+// configure passport
 var passport = require("passport")
 var TwitterStrategy = require("passport-twitter").Strategy;
 passport.use(new TwitterStrategy({
@@ -49,20 +51,15 @@ passport.use(new TwitterStrategy({
       token = accessToken
       tokenSecret = refreshToken
       profile = aProfile
-
+      // on login, either find or create a user using a Twitter ID
       db.models.User.findOrCreate({where: {
           twitterId: profile.id
       }}).then(function(user, created) {
-        //   console.log(user);
           return done(null, user)
-        // console.log(user.get({
-        //   plain: true
-        // }))
         console.log(created)
     });
   }
 ));
-
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -78,14 +75,10 @@ app.use(passport.session())
 var usersController = require("./controllers/users");
 var moviesController = require("./controllers/movies");
 
+// set up some middleware so we can have access to the session vars/current user in our views and js
 app.use(function(req, res, callback){
-//console.log("req user is", req.user);
     if (req.user){
-        res.locals.user = req.user
-        // res.locals.twitterId = req.user[0]["twitterId"]
-        // res.locals.url = "/users/" + req.user[0]["id"]
-
-        console.log(req.user[0]["spotifyId"]);
+        res.locals.user = req.user;
     }
     callback();
 })
@@ -99,7 +92,7 @@ app.get("/", function(req, res){
 app.use("/", usersController);
 app.use("/", moviesController);
 
-
+// routes for twitter authentication
 app.get('/auth/twitter',
   passport.authenticate('twitter', {
       failureRedirect: '/login',
@@ -107,16 +100,6 @@ app.get('/auth/twitter',
    })
   );
 
-// app.get('/auth/twitter/callback',
-//   passport.authenticate('twitter'), function(req, res) {
-//      // console.log("I am here", profile);
-//       req.session.token = token
-//       req.session.tokenSecret = tokenSecret
-//       req.session.profile = profile
-//
-//     // Successful authentication, redirect home.
-//       res.redirect('/');
-//   });
 app.get("/auth/twitter/callback",
   passport.authenticate("twitter", { failureRedirect: "/login" }),
   function(req, res) {

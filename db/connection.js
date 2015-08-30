@@ -15,9 +15,12 @@ if (process.env.DATABASE_URL) {
   sequelize = new Sequelize("postgres:///movie_db");
 }
 
+// set the user and movie models equal to variables
 var User = sequelize.import("../models/user");
 var Movie = sequelize.import("../models/movie");
 
+
+// associate the two models!
 Movie.belongsTo(User);
 User.hasMany(Movie);
 

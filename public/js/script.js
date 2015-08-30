@@ -1,3 +1,5 @@
+///////////// buttons and event handlers //////////
+
 // Search form:
 $('#search').on('submit', function(evt) {
   evt.preventDefault();
@@ -12,17 +14,20 @@ $('#movie-select').hide().on('change', function() {
   show(this.value);
 });
 
+// Show favorited movies:
 $("#showMovies").on("click",function(){
     $(".fave-list").children().remove();
+    // Movie.fetch will query the db for all of the saved movies (returns an array), then it will append the title of each saved movie into the DOM
     Movie.fetch()
     .then(function(movies){
       movies.forEach(function(movie){
           $(".fave-list").append("<li>"+ movie.title +"</li>")
-        // var view = new MovieView(movie)
-        // view.render();
      })
    })
 });
+
+
+///////////// SEARCH & BROWSE ////////////////////
 
 function search(keyword) {
   //  endpoint for our json search request
@@ -77,32 +82,10 @@ function show(imdbId) {
 
 }
 
-$("#makeUser").on("click", function(e){
-    e.preventDefault()
-    var userName = $("#userName").val()
-    $.ajax({
-        type: 'POST',
-        data: { "name": userName },
-        url: "http://localhost:4567/users"
-    }).done(function(response){
-        console.log(response);
-        console.log("I worked");
-        // $("#user").append("<p> Hello, "+ userName +"!</p>")
-        // $("#user").append('<div class="browse"><h1>Movie Browser</h1>')
-        // $(".browse").append('<form id="search"><input type="search" placeholder="Search for a title..." id="movie-search"><input type="submit" value="Submit"></form>')
-        // $("form").closest().append('<select id="movie-select"><option value="">Select a movie...</option></select><div id="movie-detail"></div></div>')
-         // Search form:
+///////////////////////////////// SAVE MOVIE /////////////////////////////////////
 
-
-
-    }).fail(function(response){
-        console.log(response);
-        console.log("i failed :()");
-    })
-})
-
-  // ajax to post movie to favorites
-  // when the user clicks the button to add the movie to a list of favorites, we want to store that information in the database, which is executed with a post request to the movies controller
+// ajax to post movie to favorites
+// when the user clicks the button to add the movie to a list of favorites, we want to store that information in the database, which is executed with a post request to the movies controller
 $("body").on("click", "#addFave", function(e){
     e.preventDefault();
     var movieTitle = $(".movieTitle").html()

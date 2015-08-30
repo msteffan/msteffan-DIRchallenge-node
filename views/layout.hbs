@@ -3,39 +3,27 @@
     <head>
         <title>Movie Browser</title>
         <link rel="stylesheet" href="/style.css">
-        <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <link rel="icon"
+        <!-- <link rel="icon"
           type="image/png"
           href="/img/favicon.png"> -->
    </head>
    <body>
-       <div class="row header nav">
-
-         {{#if user}}
-           <!-- <a href='/'>Home</a> -->
+       <!-- if the user is logged in, display the logout button and the rest of the application; otherwise, prompt the user to login with twitter -->
+       {{#if user}}
            <a href='/signout'>Log Out</a>
-           
-           </div>
            {{{body}}}
-         {{else}}
+       {{else}}
            <h1>Movie Browser</h1>
-
            <form action="/auth/twitter">
-             <input class="login" type="submit" value="Log in with Twitter">
+                <input class="login" type="submit" value="Log in with Twitter">
            </form>
-           <!-- <a href='/signout'>Log Out</a> -->
-           </div>
-         {{/if}}
-
-
-
-
+      {{/if}}
+      <!-- pulling in alllll of our script files! -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="/js/models/user.js"></script>
       <script src="/js/models/movie.js"></script>
-      <script src="/js/views/movieView.js"></script>
-      <script src="/js/views/userView.js"></script>
+      <!-- <script src="/js/views/movieView.js"></script>
+      <script src="/js/views/userView.js"></script> -->
       <script src="/js/script.js"></script>
-
   </body>
 </html>
