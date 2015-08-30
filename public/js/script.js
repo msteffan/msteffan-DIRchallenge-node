@@ -31,7 +31,7 @@ $("#showMovies").on("click",function(){
 
 function search(keyword) {
   //  endpoint for our json search request
-  var url = 'http://www.omdbapi.com/?s='+escape(keyword);
+  var url = 'https://www.omdbapi.com/?s='+escape(keyword);
 
   $.getJSON(url)
   // if the request succeeds, execute this function
@@ -67,13 +67,13 @@ function imdbDone(searchKeyword, imdbSearchData) {
 function show(imdbId) {
   if (!imdbId) return;
 
-  var url = 'http://www.omdbapi.com/?i='+imdbId;
+  var url = 'https://www.omdbapi.com/?i='+imdbId;
 
   $.getJSON(url).then(function(imdbMovieData) {
 
       console.log(imdbMovieData);
     // once we have the data about the movie, we want to display it on the page using the following:
-    var url = "http://www.imdb.com/title/" + imdbMovieData.imdbID
+    var url = "https://www.imdb.com/title/" + imdbMovieData.imdbID
     var detail = "<h2 class='movieTitle'><a href=" + url + ">" + imdbMovieData.Title + '</a></h2>';
     detail += '<img src="'+ imdbMovieData.Poster +'" alt="'+ imdbMovieData.Title +'">' + "<p>"+ imdbMovieData.Plot +"</p>";
     $('#movie-detail').html(detail);
