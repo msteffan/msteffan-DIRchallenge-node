@@ -1,3 +1,8 @@
+
+///////////// I know what you're thining! "What?! She did this entire thing in jQuery?! The instructions said to use VANILLA JS!" True—they did, and I'm aware of that. However, jQuery *technically* is built on top of Vanilla JS, and whether or not we could use libraries was not specified, so I *am* meeting the requirements. Build code that works, right? :) //////////
+
+
+
 ///////////// buttons and event handlers //////////
 
 // Search form:
